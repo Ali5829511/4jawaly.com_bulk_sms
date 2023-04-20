@@ -23,8 +23,8 @@ messages = {
 
 url = "https://api-sms.4jawaly.com/api/v1/account/area/sms/send"
 headers = {
-   # "Accept": "application/json",
-  #  "Content-Type": "application/json",
+     "Accept": "application/json",
+     "Content-Type": "application/json",
     "Authorization": f"Basic {app_hash}"
 }
 
