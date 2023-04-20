@@ -1,0 +1,31 @@
+import requests
+import json
+import base64
+
+app_id = "27WOaZb64UJ1RMPnyxsIPaefiwwnAYn7f7109ahK"
+app_sec = "NoAvpN3kP9VzZT7aWr6l2dzqhhaJdV8oOaWzhPYS6chmMYrJobGz0OkhPKxwfJSPZ1e5czzbpC04m78ikaHeY6qT11tpdVJSL1C9"
+app_hash = base64.b64encode(f"{app_id}:{app_sec}".encode()).decode()
+base_url = "https://api-sms.4jawaly.com/api/v1/"
+
+'''query = {
+    "is_active": 1,  # get active only
+    "order_by": "id",  # package_points, current_points, expire_at or id (default)
+    "order_by_type": "desc",  # desc or asc
+    "page": 1,
+    "page_size": 10,
+    "return_collection": 1  # if you want to get all collection
+}'''
+
+url = base_url + "account/area/me/packages?" + "&".join(f"{k}={v}" for k, v in query.items())
+headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+    "Authorization": f"Basic {app_hash}"
+}
+
+response = requests.get(url, headers=headers)
+
+response_json = json.loads(response.text)
+
+if response_json["code"] == 200:
+    print("your balance : " + str(response_json["total_balance"]))
