@@ -7,6 +7,8 @@ app_sec = "Api Secret"
 app_hash = base64.b64encode(f"{app_id}:{app_sec}".encode()).decode()
 base_url = "https://api-sms.4jawaly.com/api/v1/"
 
+query = {}  # Define the query parameters here if needed
+
 url = base_url + "account/area/senders?" + "&".join(f"{k}={v}" for k, v in query.items())
 
 headers = {
@@ -18,12 +20,10 @@ headers = {
 response = requests.get(url, headers=headers)
 response_json = json.loads(response.text)
 
-print("Error code: " + str(response_json["code"]))
+print("error code:", response_json["code"])
+
 if response_json["code"] == 200:
-    for item in response_json["items"]:
+    for item in response_json["items"]["data"]:
         print(item["sender_name"])
-elif response.status_code == 400:
-    response_json = json.loads(response.text)
-    print(response_json["message"])
 else:
-    print(response.status_code)
+    print("message:", response_json["message"])
