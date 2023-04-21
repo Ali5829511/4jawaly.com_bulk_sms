@@ -2,7 +2,7 @@ import requests
 import json
 import base64
 
-app_id = "ِApi Key"
+app_id = "Api Key"
 app_sec = "Api Secret"
 app_hash = base64.b64encode(f"{app_id}:{app_sec}".encode()).decode()
 base_url = "https://api-sms.4jawaly.com/api/v1/"
